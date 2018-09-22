@@ -1,5 +1,5 @@
 const chai = require("chai");
-const chaiHttp = require("chai-http");
+const chaiHttp = require("chai-http"); //chai browser
 
 const {
     app,
@@ -10,9 +10,10 @@ const {
 const expect = chai.expect;
 
 chai.use(chaiHttp);
-
+//suite of tests
 describe('Recipes', function () {
-
+    //there is also a beforeEach/afterEach
+    //use to add recipes to test
     before(function () {
         return runServer();
     });
@@ -20,7 +21,7 @@ describe('Recipes', function () {
     after(function () {
         return closeServer();
     });
-
+    //test cases - be specific in title in case a lot of tests. Expect simpler than should but fast less complex
     it('should list items on GET', function () {
         return chai
             .request(app)
@@ -62,7 +63,8 @@ describe('Recipes', function () {
 
     it('should update item on PUT', function () {
         const updateData = {
-            name: "foo" [Ingredients: "bizz", "bang"]
+            name: "foo",
+            Ingredients: ["bizz", "bang"]
         };
         return (chai
             .request(app)
@@ -79,8 +81,8 @@ describe('Recipes', function () {
             .then(function (res) {
                 expect(res).to.have.status(204);
                 expect(res).to.be.json; //these
-                expect(res.body).to.be.a("object"); //aren't
-                expect(res.body).to.deep.equal(updateData); //included in answer
+                expect(res.body).to.be.a("object"); //aren't included
+                expect(res.body).to.deep.equal(updateData); // in the answer
             })
         );
     });
