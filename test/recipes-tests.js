@@ -79,7 +79,7 @@ describe('Recipes', function () {
             })
 
             .then(function (res) {
-                expect(res).to.have.status(400);
+                expect(res).to.have.status(200);
                 expect(res).to.be.json; //these
                 expect(res.body).to.be.a("object"); //aren't included
                 expect(res.body).to.deep.equal(updateData); // in the answer
