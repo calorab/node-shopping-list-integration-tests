@@ -60,33 +60,32 @@ describe('Recipes', function () {
                 );
             });
     });
+    it('should update item on PUT', function () {
+        const updateData = {
+            name: "foo",
+            Ingredients: ["bizz", "bang"]
+        };
+        return (chai
+            .request(app)
+            .get('/recipes')
+            .then(function (res) {
+                console.log(res.body);
+                updateData.id = res.body[0].id;
 
-    //    it('should update item on PUT', function () {
-    //        const updateData = {
-    //            name: "foo",
-    //            Ingredients: ["bizz", "bang"]
-    //        };
-    //        return (chai
-    //            .request(app)
-    //            .get('/recipes')
-    //            .then(function (res) {
-    //                console.log(res.body);
-    //                updateData.id = res.body[0].id;
-    //
-    //                return chai
-    //                    .request(app)
-    //                    .put(`/shopping-list/${updateData.id}`)
-    //                    .send(updateData)
-    //            })
-    //
-    //            .then(function (res) {
-    //                expect(res).to.have.status(400);
-    //                expect(res).to.be.json; //these
-    //                expect(res.body).to.be.a("object"); //aren't included
-    //                expect(res.body).to.deep.equal(updateData); // in the answer
-    //            })
-    //        );
-    //    });
+                return chai
+                    .request(app)
+                    .put(`/shopping-list/${updateData.id}`)
+                    .send(updateData)
+            })
+
+            .then(function (res) {
+                expect(res).to.have.status(400);
+                expect(res).to.be.json; //these
+                expect(res.body).to.be.a("object"); //aren't included
+                expect(res.body).to.deep.equal(updateData); // in the answer
+            })
+        );
+    });
 
     it("should delete items on DELETE", function () {
         return (
